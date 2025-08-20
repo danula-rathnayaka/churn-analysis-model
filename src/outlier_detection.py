@@ -29,10 +29,10 @@ class IQROutlierDetectionStrategy(OutlierDetectionStrategy):
 
 class OutlierDetector:
     def __init__(self, strategy):
-        self.strategy = strategy
+        self._strategy = strategy
 
     def detect_outliers(self, df, selected_cols):
-        return self.strategy.detect_outliers(df, selected_cols)
+        return self._strategy.detect_outliers(df, selected_cols)
 
     def handle_outliers(self, df, selected_cols, method="remove"):
         outliers = self.detect_outliers(df, selected_cols)

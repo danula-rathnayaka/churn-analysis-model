@@ -26,7 +26,7 @@ class NominalEncodingStrategy(FeatureEncodingStrategy):
     def __init__(self, nominal_columns):
         self.nominal_columns = nominal_columns
         self.encoder_dicts = {}
-        os.makedirs('artifacts/encode', exist_ok=True)
+        os.makedirs('../artifacts/encode', exist_ok=True)
 
     def encode(self, df):
         for column in self.nominal_columns:
@@ -34,7 +34,7 @@ class NominalEncodingStrategy(FeatureEncodingStrategy):
             encoder_dict = {value: i for i, value in enumerate(unique_values)}
             self.encoder_dicts[column] = encoder_dict
 
-            encoder_path = os.path.join('artifacts/encode', f"{column}_encoder.json")
+            encoder_path = os.path.join('../artifacts/encode', f"{column}_encoder.json")
             with open(encoder_path, "w") as f:
                 json.dump(encoder_dict, f)
 
@@ -45,7 +45,7 @@ class NominalEncodingStrategy(FeatureEncodingStrategy):
         return self.encoder_dicts
 
 
-class OrdinalEncodingStratergy(FeatureEncodingStrategy):
+class OrdinalEncodingStrategy(FeatureEncodingStrategy):
     def __init__(self, ordinal_mappings):
         self.ordinal_mappings = ordinal_mappings
 
