@@ -1,74 +1,50 @@
 .PHONY: all clean install train-pipeline data-pipeline streaming-inference run-all help
 
-# Default Python interpreter
-PYTHON = python
-VENV = .venv/bin/activate
+# Python inside your .venv
+VENV_PYTHON = .venv\Scripts\python.exe
 
-# Default target
 all: help
 
-# Help target
 help:
-	@echo "Available targets:"
-	@echo "  make install             - Install project dependencies and set up environment"
+	@echo Available targets:
+	@echo "  make install             - Create virtual env & install dependencies"
 	@echo "  make data-pipeline       - Run the data pipeline"
 	@echo "  make train-pipeline      - Run the training pipeline"
-	@echo "  make streaming-inference - Run the streaming inference pipeline with the sample JSON"
+	@echo "  make streaming-inference - Run streaming inference pipeline"
 	@echo "  make run-all             - Run all pipelines in sequence"
-	@echo "  make clean               - Clean up artifacts"
+	@echo "  make clean               - Clean up generated artifacts"
 
-# Install project dependencies and set up environment
 install:
-	@echo "Installing project dependencies and setting up environment..."
-	@echo "Creating virtual environment..."
-	@python3 -m venv .venv
-	@echo "Activating virtual environment and installing dependencies..."
-	@source .venv/bin/activate && pip install --upgrade pip
-	@source .venv/bin/activate && pip install -r requirements.txt
-	@echo "Installation completed successfully!"
-	@echo "To activate the virtual environment, run: source .venv/bin/activate"
+	@echo Creating virtual environment...
+	@python -m venv .venv
+	@echo Installing dependencies...
+	@.venv\Scripts\python.exe -m pip install --upgrade pip
+	@.venv\Scripts\python.exe -m pip install -r requirements.txt
+	@echo Installation complete!
 
-# Clean up
 clean:
-	@echo "Cleaning up artifacts..."
-	rm -rf artifacts/models/*
-	rm -rf artifacts/evaluation/*
-	rm -rf artifacts/predictions/*
-	rm -rf data/processed/*
-	@echo "Cleanup completed!"
+	@echo Cleaning up artifacts...
+	@if exist artifacts\models rmdir /s /q artifacts\models
+	@if exist artifacts\evaluation rmdir /s /q artifacts\evaluation
+	@if exist artifacts\predictions rmdir /s /q artifacts\predictions
+	@if exist data\processed rmdir /s /q data\processed
+	@if exist pipeline.log del /q pipeline.log
+	@echo Cleanup done!
 
-
-
-# Run data pipeline
 data-pipeline:
-	@echo "Running data pipeline..."
-	@source $(VENV) && $(PYTHON) pipelines/data_pipeline.py
+	@echo Running data pipeline...
+	@$(VENV_PYTHON) pipelines\data_pipeline.py
 
-# Run training pipeline
 train-pipeline:
-	@echo "Running training pipeline..."
-	@source $(VENV) && $(PYTHON) pipelines/training_pipeline.py
+	@echo Running training pipeline...
+	@$(VENV_PYTHON) pipelines\training_pipeline.py
 
-# Run streaming inference pipeline with sample JSON
 streaming-inference:
-	@echo "Running streaming inference pipeline with sample JSON..."
-	@source $(VENV) && $(PYTHON) pipelines/streaming_inference_pipeline.py
+	@echo Running streaming inference pipeline...
+	@$(VENV_PYTHON) pipelines\streaming_inference_pipeline.py
 
-# Run all pipelines in sequence
 run-all:
-	@echo "Running all pipelines in sequence..."
-	@echo "========================================"
-	@echo "Step 1: Running data pipeline"
-	@echo "========================================"
-	@source $(VENV) && $(PYTHON) pipelines/data_pipeline.py
-	@echo "\n========================================"
-	@echo "Step 2: Running training pipeline"
-	@echo "========================================"
-	@source $(VENV) && $(PYTHON) pipelines/training_pipeline.py
-	@echo "\n========================================"
-	@echo "Step 3: Running streaming inference pipeline"
-	@echo "========================================"
-	@source $(VENV) && $(PYTHON) pipelines/streaming_inference_pipeline.py
-	@echo "\n========================================"
-	@echo "All pipelines completed successfully!"
-	@echo "========================================"
+	@echo Running all pipelines in order...
+	@$(MAKE) data-pipeline
+	@$(MAKE) train-pipeline
+	@$(MAKE) streaming-inference

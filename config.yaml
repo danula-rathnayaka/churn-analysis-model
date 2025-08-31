@@ -1,17 +1,23 @@
 data_paths:
   raw_data: "data/raw/ChurnModelling.csv"
   processed_data: "data/processed/ChurnModelling_Missing_Values_Handled.csv"
+  imputed_data: "data/processed/imputed.csv"
+  processed_dir: "data/processed"
   artifacts_dir: "artifacts"
   data_artifacts_dir: "artifacts/data"
   model_artifacts_dir: "artifacts/models"
+  X_train: "artifacts/data/X_train.csv"
+  X_test: "artifacts/data/X_test.csv"
+  Y_train: "artifacts/data/Y_train.csv"
+  Y_test: "artifacts/data/Y_test.csv"
 
 columns:
   target: "Exited"
-  drop_columns: ["CustomerId", "RowNumber", "Surname"]
-  critical_columns: ["Firstname"]
-  outlier_columns: ["CreditScore", "Age", "NumOfProducts"]
-  nominal_columns: ["Geography", "Gender"]
-  numeric_columns: ["Balance", "EstimatedSalary"]
+  drop_columns: [ "CustomerId", "RowNumber", "Surname" ]
+  critical_columns: [ "Firstname" ]
+  outlier_columns: [ "CreditScore", "Age", "NumOfProducts" ]
+  nominal_columns: [ "Geography", "Gender" ]
+  numeric_columns: [ "Balance", "EstimatedSalary" ]
   feature_columns:
     - "CreditScore"
     - "Geography"
@@ -44,11 +50,11 @@ outlier_detection:
 
 feature_binning:
   credit_score_bins:
-    Poor: [300, 580]
-    Fair: [580, 670]
-    Good: [670, 740]
-    Very Good: [740, 800]
-    Excellent: [800, 850]
+    Poor: [ 300, 580 ]
+    Fair: [ 580, 670 ]
+    Good: [ 670, 740 ]
+    Very Good: [ 740, 800 ]
+    Excellent: [ 800, 850 ]
   credit_score_mapping:
     Poor: 0
     Fair: 1
@@ -57,7 +63,7 @@ feature_binning:
     Excellent: 4
 
 feature_encoding:
-  nominal_columns: ["Geography", "Gender"]
+  nominal_columns: [ "Geography", "Gender" ]
   ordinal_mappings:
     CreditScoreBins:
       Poor: 0
@@ -68,7 +74,7 @@ feature_encoding:
 
 feature_scaling:
   scaling_type: "minmax"
-  columns_to_scale: ["Balance", "EstimatedSalary"]
+  columns_to_scale: [ "Balance", "EstimatedSalary" ]
 
 data_splitting:
   split_type: "simple"
@@ -144,6 +150,18 @@ logging:
   level: "INFO"
   format: "%(asctime)s - %(levelname)s - %(message)s"
   file: "pipeline.log"
+
+mlflow:
+  tracking_uri: "file:./mlruns"
+  experiment_name: "Zuu Crew Churn Analysis"
+  model_registry_name: "churn_prediction"
+  artifact_path: "model"
+  run_name_prefix: "churn_run"
+  tags:
+    project: "customer_churn_prediction"
+    team: "ml_engineering"
+    environment: "development"
+  autolog: true
 
 environment:
   experiment_name: "churn_analysis"
