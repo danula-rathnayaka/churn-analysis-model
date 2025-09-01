@@ -27,7 +27,7 @@ class BaseModelBuilder(ABC):
         if os.path.exists(file_path):
             raise ValueError("Model can not be loaded, file not found.")
 
-        joblib.load(file_path)
+        return joblib.load(file_path)
 
 
 class RandomForestModelBuilder(BaseModelBuilder):
@@ -44,7 +44,7 @@ class RandomForestModelBuilder(BaseModelBuilder):
         super().__init__("RandomForestClassifier", **default_params)
 
     def build_model(self):
-        self.model = RandomForestClassifier(self.model_params)
+        self.model = RandomForestClassifier(**self.model_params)
         return self.model
 
 
@@ -53,8 +53,6 @@ class XGBoostModelBuilder(BaseModelBuilder):
         default_params = {
             'max_depth': 10,
             'n_estimators': 100,
-            'min_samples_split': 2,
-            'min_samples_leaf': 1,
             'random_state': 42,
         }
 
@@ -62,5 +60,5 @@ class XGBoostModelBuilder(BaseModelBuilder):
         super().__init__("XGBClassifier", **default_params)
 
     def build_model(self):
-        self.model = XGBClassifier(self.model_params)
+        self.model = XGBClassifier(**self.model_params)
         return self.model
