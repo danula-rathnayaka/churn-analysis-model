@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+from pathlib import Path
 from typing import Optional, Dict, Any
 
 import pandas as pd
@@ -46,6 +47,8 @@ def training_pipeline(data_path: str = "data/raw/ChurnModelling.csv", model_para
 
     trainer = ModelTrainer()
     model, _ = trainer.train(model, X_train=X_train, Y_train=Y_train.squeeze())
+
+    Path(model_path).parent.mkdir(parents=True, exist_ok=True)
 
     trainer.save_model(model, model_path)
 

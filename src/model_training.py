@@ -14,7 +14,7 @@ class ModelTrainer:
         joblib.dump(model, file_path)
 
     def load_model(self, file_path: Path):
-        if os.path.exists(file_path):
+        if not os.path.exists(file_path):
             raise ValueError("Model can not be loaded, file not found.")
 
         return joblib.load(file_path)

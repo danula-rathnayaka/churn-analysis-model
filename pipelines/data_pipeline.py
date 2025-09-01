@@ -79,7 +79,7 @@ def data_pipeline(
         df = drop_handler.handle(df)
         df = age_handler.handle(df)
         df = gender_handler.handle(df)
-        df.to_csv('temp_imputed.csv', index=False)
+        df.to_csv('artifacts/temp_imputed.csv', index=False)
 
     df = pd.read_csv('artifacts/temp_imputed.csv')
 
@@ -112,7 +112,7 @@ def data_pipeline(
     logger.info(f"data after feature scaling: \n{df.head()}")
 
     logger.info('\nStep 7: Post Processing')
-    df = df.drop(columns=['CustomerId', 'Firstname', 'Lastname'])
+    df = df.drop(columns=['RowNumber', 'CustomerId', 'Firstname', 'Lastname'])
     logger.info(f"data after post processing: \n{df.head()}")
 
     logger.info('\nStep 8: Data Splitting')
