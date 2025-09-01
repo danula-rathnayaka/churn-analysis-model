@@ -1,7 +1,8 @@
-import os
-import yaml
 import logging
+import os
 from typing import Dict, Any, List
+
+import yaml
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -98,6 +99,11 @@ def get_pipeline_config():
 def get_inference_config():
     config = load_config()
     return config.get("inference", {})
+
+
+def get_mlflow_config():
+    config = load_config()
+    return config.get('mlflow', {})
 
 
 def get_config() -> Dict[str, Any]:

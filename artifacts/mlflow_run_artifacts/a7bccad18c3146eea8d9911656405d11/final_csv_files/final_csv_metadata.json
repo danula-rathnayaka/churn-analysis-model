@@ -1,0 +1,163 @@
+{
+  "csv_files": {
+    "X_train": {
+      "file_path": "D:\\ZuuCrew\\Build Production-Ready Machine Learning Systems\\churn_analysis_model_mp01\\pipelines\\..\\artifacts/data\\X_train.csv",
+      "file_size_mb": 0.41,
+      "shape": [
+        7990,
+        10
+      ],
+      "columns": [
+        "Geography",
+        "Gender",
+        "Age",
+        "Tenure",
+        "Balance",
+        "NumOfProducts",
+        "HasCrCard",
+        "IsActiveMember",
+        "EstimatedSalary",
+        "CreditScoreBins"
+      ],
+      "sample_values": {
+        "Geography": {
+          "0": 0,
+          "1": 0
+        },
+        "Gender": {
+          "0": 0,
+          "1": 0
+        },
+        "Age": {
+          "0": 39.0,
+          "1": 33.0
+        },
+        "Tenure": {
+          "0": 0,
+          "1": 4
+        },
+        "Balance": {
+          "0": 0.4691336231375855,
+          "1": 0.5170690617852054
+        },
+        "NumOfProducts": {
+          "0": 1,
+          "1": 2
+        },
+        "HasCrCard": {
+          "0": 1,
+          "1": 1
+        },
+        "IsActiveMember": {
+          "0": 0,
+          "1": 0
+        },
+        "EstimatedSalary": {
+          "0": 0.9897041167431488,
+          "1": 0.8906464567366182
+        },
+        "CreditScoreBins": {
+          "0": 1,
+          "1": 2
+        }
+      }
+    },
+    "X_test": {
+      "file_path": "D:\\ZuuCrew\\Build Production-Ready Machine Learning Systems\\churn_analysis_model_mp01\\pipelines\\..\\artifacts/data\\X_test.csv",
+      "file_size_mb": 0.1,
+      "shape": [
+        1998,
+        10
+      ],
+      "columns": [
+        "Geography",
+        "Gender",
+        "Age",
+        "Tenure",
+        "Balance",
+        "NumOfProducts",
+        "HasCrCard",
+        "IsActiveMember",
+        "EstimatedSalary",
+        "CreditScoreBins"
+      ],
+      "sample_values": {
+        "Geography": {
+          "0": 1,
+          "1": 0
+        },
+        "Gender": {
+          "0": 1,
+          "1": 0
+        },
+        "Age": {
+          "0": 40.0,
+          "1": 29.0
+        },
+        "Tenure": {
+          "0": 2,
+          "1": 5
+        },
+        "Balance": {
+          "0": 0.4909443910075202,
+          "1": 0.0
+        },
+        "NumOfProducts": {
+          "0": 1,
+          "1": 2
+        },
+        "HasCrCard": {
+          "0": 1,
+          "1": 0
+        },
+        "IsActiveMember": {
+          "0": 0,
+          "1": 0
+        },
+        "EstimatedSalary": {
+          "0": 0.7415628192492383,
+          "1": 0.6072561429616529
+        },
+        "CreditScoreBins": {
+          "0": 0,
+          "1": 0
+        }
+      }
+    },
+    "Y_train": {
+      "file_path": "D:\\ZuuCrew\\Build Production-Ready Machine Learning Systems\\churn_analysis_model_mp01\\pipelines\\..\\artifacts/data\\Y_train.csv",
+      "file_size_mb": 0.02,
+      "shape": [
+        7990,
+        1
+      ],
+      "columns": [
+        "Exited"
+      ],
+      "sample_values": {
+        "Exited": {
+          "0": 0,
+          "1": 0
+        }
+      }
+    },
+    "Y_test": {
+      "file_path": "D:\\ZuuCrew\\Build Production-Ready Machine Learning Systems\\churn_analysis_model_mp01\\pipelines\\..\\artifacts/data\\Y_test.csv",
+      "file_size_mb": 0.01,
+      "shape": [
+        1998,
+        1
+      ],
+      "columns": [
+        "Exited"
+      ],
+      "sample_values": {
+        "Exited": {
+          "0": 0,
+          "1": 0
+        }
+      }
+    }
+  },
+  "timestamp": "2025-09-01T17:52:03.550211"
+}
